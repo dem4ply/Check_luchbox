@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_date">Fecha</string>
+    <string name="txt_food">Comida</string>
+    <string name="txt_type_food">Tipo de comida</string>
+    <string name="btn_login">Login</string>
+    <string-array name="spn_dinner_room">
+        <item >comedor 1</item>
+        <item >comedor 2</item>
+        <item >comedor 3</item>
+    </string-array>
+    <string-array name="spn_food">
+        <item >desayuno</item>
+        <item >almuerso</item>
+        <item >cena</item>
+    </string-array>
+    <string-array name="spn_type_food">
+        <item >normal</item>
+        <item >boxlunch</item>
+    </string-array>
+    
+</resources>
