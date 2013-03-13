@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_dinner_room">Comedor</string>
+    <string name="txt_type">Tipo</string>
+    <string name="txt_count">Contador</string>
+    <string name="txt_boxlunch">Boxlunch</string>
+    <string name="btn_scan">Escanear QR</string>
+    <string name="txt_data_sportsman">Datos del deportista</string>
+    <string name="txt_univerdidad">txt_universidad</string>
+    <string name="txt_discipline">txt_discipline</string>
+    <string name="txt_otros">txt_otros</string>
+    <string name="img_desc_check">imagen que dice si entra o no</string>
+    <string name="txt_cero">0</string>
+    <string name="chk_sportman">Dep</string>
+    <string name="chk_comitiva">Com</string>
+    <string name="chk_judge">Jue</string>
+    <string name="chk_staff">staff</string>
+    
+</resources>
