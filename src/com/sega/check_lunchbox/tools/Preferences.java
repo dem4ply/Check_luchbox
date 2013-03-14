@@ -4,17 +4,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.sega.check_lunchbox.tools.struc.struc_Param_login;
 import com.sega.check_lunchbox.tools.struc.struc_Params_sql_server;
 
 public class Preferences
 {
-	public SharedPreferences prefs_SQL;
+	public SharedPreferences prefs_SQL, prefs_login;
 	public Context context;
 	
 	public Preferences(Context context)
 	{
 		this.context = context;
-		 prefs_SQL = context.getSharedPreferences("SQLServer", Context.MODE_PRIVATE);
+		prefs_SQL = context.getSharedPreferences("SQLServer", Context.MODE_PRIVATE);
+		prefs_login = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 	}
 	
 	public void Set_default_preferences()
@@ -30,6 +32,30 @@ public class Preferences
 		edit.putString("selectMethod", "Direct");
 		
 		edit.commit();
+	}
+	
+	public void Set_login(String date, int food, int type_food, int dinner_room, String str_dinner_room)
+	{
+		Editor edit = prefs_login.edit();
+		
+		edit.putString("date", date);
+		edit.putString("str_dinner_room", str_dinner_room);
+		edit.putInt("food", food);
+		edit.putInt("type_food", type_food);
+		edit.putInt("dinner_room", dinner_room);
+		
+		edit.commit();
+	}
+	
+	public struc_Param_login Get_params_login()
+	{
+		String date = prefs_login.getString("date", "");
+		String str_dinner_room = prefs_login.getString("str_dinner_room", "");
+		int food = prefs_login.getInt("food", 0);
+		int type_food = prefs_login.getInt("type_food", 0);
+		int dinner_room = prefs_login.getInt("dinner_room", 0);
+		
+		return new struc_Param_login(date, food, type_food, dinner_room, str_dinner_room);
 	}
 	
 	public struc_Params_sql_server Get_params_sql_server()
