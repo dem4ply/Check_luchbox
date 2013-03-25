@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.sega.check_lunchbox.R;
 import com.sega.check_lunchbox.model.Model_Check;
 import com.sega.check_lunchbox.tools.Get_Date;
+import com.sega.check_lunchbox.tools.Notifications;
 import com.sega.check_lunchbox.tools.Preferences;
 import com.sega.check_lunchbox.tools.struc.struc_Param_login;
 
@@ -78,20 +79,6 @@ public class Activity_check extends Activity
 		txt_data_dinner_room.setText(param.str_dinner_room);
 	}
 	
-	private void _Play_sound()
-	{
-		try
-		{
-			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-			r.play();
-	   }
-		catch (Exception e)
-		{
-			Log.e("play_sound", e.getMessage());
-		}
-	}
-	
 	private class tsk_Send_qr extends AsyncTask<String, Void, Boolean>
 	{
 
@@ -125,14 +112,13 @@ public class Activity_check extends Activity
 	
 	private class tsk_Play_sound extends AsyncTask<Long, Void, Void>
 	{
-
 		@Override
 		protected Void doInBackground(Long... sounds)
 		{
 			Long count = sounds[0];
 			for (int i = 0; i < count; ++i)
 			{
-				_Play_sound();
+				Notifications.Play_sound(getApplicationContext() );
 				try
 				{
 					Thread.sleep(1000);
