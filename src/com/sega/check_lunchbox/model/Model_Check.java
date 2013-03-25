@@ -17,15 +17,17 @@ public class Model_Check
 		query = new SQL_server(context, "");
 	}
 	
-	public boolean Check_qr(String qr, String date, int dinner_room) throws SQLException
+	public boolean Check_qr(String qr, String date, int dinner_room, int food, int type_food) throws SQLException
 	{
 		ResultSet cursor;
 		int result = 0;
-		// TODO: asignar el sql
+		String sql = "SELECT * FROM ValidarAccesoComedor(0, %d, '%s', %d, %d)";
+		sql = String.format(sql, dinner_room, date, food, type_food);
+		query.sql = sql;
 		
 		query.Open();
 		cursor = query.Exec();
-		if ( cursor.next() )
+		//if ( cursor.next() )
 			result = cursor.getInt(0);
 		
 		Log.v("Check_qr", "result: " + Integer.toString(result) );

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +78,20 @@ public class Activity_check extends Activity
 		txt_data_dinner_room.setText(param.str_dinner_room);
 	}
 	
+	private void _Play_sound()
+	{
+		try
+		{
+			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+			r.play();
+	   }
+		catch (Exception e)
+		{
+			Log.e("play_sound", e.getMessage());
+		}
+	}
+	
 	private class tsk_Send_qr extends AsyncTask<String, Void, Boolean>
 	{
 
@@ -86,7 +103,7 @@ public class Activity_check extends Activity
 			Model_Check model = new Model_Check( getApplicationContext() );
 			try
 			{
-				result = model.Check_qr(qr, Get_Date.Get_date_now(), 0);
+				result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
 			}
 			catch (SQLException e)
 			{
@@ -98,7 +115,34 @@ public class Activity_check extends Activity
 		protected void onPostExecute(Boolean result)
 		{
 			Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
+			if (result)
+				new tsk_Play_sound().execute(1L);
+			else
+				new tsk_Play_sound().execute(4L);
 		}
 
+	}
+	
+	private class tsk_Play_sound extends AsyncTask<Long, Void, Void>
+	{
+
+		@Override
+		protected Void doInBackground(Long... sounds)
+		{
+			Long count = sounds[0];
+			for (int i = 0; i < count; ++i)
+			{
+				_Play_sound();
+				try
+				{
+					Thread.sleep(1000);
+				}
+				catch (InterruptedException e)
+				{
+					Log.e("tsk_play_sound", e.getMessage() );
+				}
+			}
+			return null;
+		}
 	}
 }

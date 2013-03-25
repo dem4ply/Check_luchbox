@@ -26,7 +26,7 @@ public class Preferences
 		edit.putString("url", "jdbc:jtds:sqlserver://");
 		edit.putString("server", "72.167.245.123");
 		edit.putString("port", "1500");
-		edit.putString("database", "BDUniversiad");
+		edit.putString("database", "BDUniversiada");
 		edit.putString("user", "UNIVERSIADA2013");
 		edit.putString("pass", "UAS2013");
 		edit.putString("selectMethod", "Direct");
@@ -64,7 +64,7 @@ public class Preferences
 		result.url = prefs_SQL.getString("url", "jdbc:jtds:sqlserver://");
 		result.server = prefs_SQL.getString("server", "72.167.245.123");
 		result.port = prefs_SQL.getString("port", "1500");
-		result.database = prefs_SQL.getString("database", "BDUniversiad");
+		result.database = prefs_SQL.getString("database", "BDUniversiada");
 		result.user = prefs_SQL.getString("user", "UNIVERSIADA2013");
 		result.pass = prefs_SQL.getString("pass", "UAS2013");
 		result.select_method = prefs_SQL.getString("select_method", "Direct");

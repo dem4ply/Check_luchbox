@@ -73,6 +73,7 @@ public class SQL_server
 	
 	public ResultSet Exec() throws SQLException
 	{
+		Log.v("SQL server.sql", this.sql);
 		ResultSet result = null;
 		try
 		{
