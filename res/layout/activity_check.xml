@@ -70,19 +70,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" >
 
-                        <CheckBox
+                        <TextView
                             android:id="@+id/chk_sportsman"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/chk_sportman" />
+                            android:gravity="center"
+                            android:text="@string/chk_sportman"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                        <CheckBox
+                        <TextView
                             android:id="@+id/chk_comitiva"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/chk_comitiva" />
+                            android:gravity="center"
+                            android:text="@string/chk_comitiva"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -90,19 +95,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" >
 
-                        <CheckBox
+                        <TextView
                             android:id="@+id/chk_judge"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/chk_judge" />
+                            android:gravity="center"
+                            android:text="@string/chk_judge"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                        <CheckBox
+                        <TextView
                             android:id="@+id/chk_staff"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/chk_staff" />
+                            android:gravity="center"
+                            android:text="@string/chk_staff"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -167,7 +177,7 @@
 
     <Button
         android:id="@+id/btn_scan"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_scan" />
 

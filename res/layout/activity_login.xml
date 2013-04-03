@@ -11,16 +11,16 @@
 
         <TextView
             android:id="@+id/TextView03"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/txt_date"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
             android:id="@+id/edt_date"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:inputType="date" />
     </LinearLayout>
@@ -80,16 +80,15 @@
 
         <Spinner
             android:id="@+id/spn_dinner_room"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:entries="@array/spn_dinner_room" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_login" />
 
