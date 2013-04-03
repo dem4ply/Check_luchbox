@@ -16,10 +16,10 @@ import android.widget.Toast;
 
 import com.sega.check_lunchbox.R;
 import com.sega.check_lunchbox.model.Model_Check;
-import com.sega.check_lunchbox.tools.Get_Date;
 import com.sega.check_lunchbox.tools.Notifications;
 import com.sega.check_lunchbox.tools.Preferences;
 import com.sega.check_lunchbox.tools.struc.struc_Param_login;
+import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 
 public class Activity_check extends Activity
 {
@@ -79,14 +79,14 @@ public class Activity_check extends Activity
 		txt_data_dinner_room.setText(param.str_dinner_room);
 	}
 	
-	private class tsk_Send_qr extends AsyncTask<String, Void, Boolean>
+	private class tsk_Send_qr extends AsyncTask<String, Void, struc_check_qr>
 	{
 
 		@Override
-		protected Boolean doInBackground(String... qrs)
+		protected struc_check_qr doInBackground(String... qrs)
 		{
 			String qr = qrs[0];
-			boolean result = false;
+			struc_check_qr result = new struc_check_qr();
 			Model_Check model = new Model_Check( getApplicationContext() );
 			try
 			{
@@ -100,10 +100,10 @@ public class Activity_check extends Activity
 			return result;
 		}
 		
-		protected void onPostExecute(Boolean result)
+		protected void onPostExecute(struc_check_qr result)
 		{
 			Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
-			if (result)
+			if (result.result)
 				new tsk_Play_sound().execute(1L);
 			else
 				new tsk_Play_sound().execute(4L);
