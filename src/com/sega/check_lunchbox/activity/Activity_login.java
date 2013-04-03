@@ -86,11 +86,11 @@ public class Activity_login extends Activity
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener()
 	{
 		// onDateSet method
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth)
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
 		{
-			String date_selected = String.valueOf(dayOfMonth) + " /"
-					+ String.valueOf(monthOfYear + 1) + " /" + String.valueOf(year);
+			String date_selected = String.valueOf(year) + '-' +
+					String.valueOf(dayOfMonth) + "-" +
+					String.valueOf(monthOfYear + 1);
 			edt_date.setText(date_selected);
 		}
 	};

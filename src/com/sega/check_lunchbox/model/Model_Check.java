@@ -20,20 +20,24 @@ public class Model_Check
 	public boolean Check_qr(String qr, String date, int dinner_room, int food, int type_food) throws SQLException
 	{
 		ResultSet cursor;
-		int result = 0;
-		String sql = "SELECT * FROM ValidarAccesoComedor(0, %d, '%s', %d, %d)";
-		sql = String.format(sql, dinner_room, date, food, type_food);
+		String result = "";
+		String sql = "SELECT * FROM ValidarAccesoComedor('%s', %d, '%s', %d, %d)";
+		sql = String.format(sql, qr, dinner_room, date, food, type_food);
 		query.sql = sql;
 		
 		query.Open();
 		cursor = query.Exec();
-		//if ( cursor.next() )
-			result = cursor.getInt(0);
+		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
+		if ( cursor.next() )
+		{
+			result = cursor.getString(2);
+		}
 		
-		Log.v("Check_qr", "result: " + Integer.toString(result) );
+		//Log.v("Check_qr", "result: " + Integer.toString(result) );
+		Log.v("Check_qr", result );
 		cursor.close();
 		query.Close();
-		return result != 0;
+		return result != "";
 	}
 
 }

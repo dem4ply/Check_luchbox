@@ -4,9 +4,6 @@ import java.sql.SQLException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +23,8 @@ import com.sega.check_lunchbox.tools.struc.struc_Param_login;
 
 public class Activity_check extends Activity
 {
+	private String str_date;
+	
 	private TextView txt_data_dinner_room;
 	private Button btn_scan;
 	@Override
@@ -45,7 +44,8 @@ public class Activity_check extends Activity
 				startActivityForResult(intent, 0);
 			}
 		});
-		
+		Preferences pref = new Preferences( getApplicationContext() );
+		str_date = pref.Get_params_login().date;
 		_Set_dashboard();
 	}
 
@@ -90,7 +90,8 @@ public class Activity_check extends Activity
 			Model_Check model = new Model_Check( getApplicationContext() );
 			try
 			{
-				result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
+				//result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
+				result = model.Check_qr(qr, str_date, 1, 1, 1);
 			}
 			catch (SQLException e)
 			{
