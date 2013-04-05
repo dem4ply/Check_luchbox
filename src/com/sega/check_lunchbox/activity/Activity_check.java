@@ -3,6 +3,7 @@ package com.sega.check_lunchbox.activity;
 import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,9 +21,11 @@ import android.widget.Toast;
 
 import com.sega.check_lunchbox.R;
 import com.sega.check_lunchbox.model.Model_Check;
+import com.sega.check_lunchbox.model.Model_Login;
 import com.sega.check_lunchbox.tools.Notifications;
 import com.sega.check_lunchbox.tools.Preferences;
 import com.sega.check_lunchbox.tools.struc.struc_Entradas;
+import com.sega.check_lunchbox.tools.struc.struc_Login;
 import com.sega.check_lunchbox.tools.struc.struc_Param_login;
 import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 
@@ -75,6 +79,7 @@ public class Activity_check extends Activity
 		id_comedor = pref.Get_params_login().dinner_room;
 		_Set_dashboard_init();
 		new Timer().schedule(new timer_Get_entrada(), 0, 10000);
+		new tsk_Get_comedor().execute();
 	}
 
 	@Override
@@ -300,6 +305,32 @@ public class Activity_check extends Activity
 				}
 			});
 			
+		}
+	}
+	
+	private class tsk_Get_comedor extends AsyncTask<Void, Void, struc_Login>
+	{
+		@Override
+		protected struc_Login doInBackground(Void ... params)
+		{
+			//Toast.makeText(getApplicationContext(), "qr-init", Toast.LENGTH_SHORT).show();
+			struc_Login result = new struc_Login();
+			Model_Login model = new Model_Login( getApplicationContext() );
+			try
+			{
+				//result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
+				result = model.Get_comedor(id_comedor);
+			}
+			catch (SQLException e)
+			{
+				Log.e("Check_qr", e.getMessage() );
+			}
+			return result;
+		}
+		
+		protected void onPostExecute(struc_Login result)
+		{
+			_Set_dashboard_type(result.sportman, result.comitiva, result.judge, result.staff);
 		}
 	}
 }

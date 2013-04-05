@@ -1,11 +1,14 @@
 package com.sega.check_lunchbox.activity;
 
+import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Vector;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,13 +16,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.sega.check_lunchbox.R;
+import com.sega.check_lunchbox.model.Model_Login;
 import com.sega.check_lunchbox.tools.Preferences;
+import com.sega.check_lunchbox.tools.struc.struc_Login;
 
 public class Activity_login extends Activity
 {
@@ -39,6 +45,8 @@ public class Activity_login extends Activity
 		spn_type_food = (Spinner)findViewById(R.id.spn_type_food);
 		spn_dinner_room = (Spinner)findViewById(R.id.spn_dinner_room);
 		btn_login = (Button)findViewById(R.id.btn_login);
+		
+		new tsk_Get_comedores().execute();
 		
 		edt_date.setOnTouchListener(new OnTouchListener(){
 			@SuppressWarnings("deprecation")
@@ -115,4 +123,39 @@ public class Activity_login extends Activity
 		
 		startActivity(intent);
 	}
+	
+	private class tsk_Get_comedores extends AsyncTask<Void, Void, Vector<struc_Login>>
+	{
+		@Override
+		protected Vector<struc_Login> doInBackground(Void ... params)
+		{
+			//Toast.makeText(getApplicationContext(), "qr-init", Toast.LENGTH_SHORT).show();
+			Vector<struc_Login> result = new Vector<struc_Login>();
+			Model_Login model = new Model_Login( getApplicationContext() );
+			try
+			{
+				//result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
+				result = model.Get_login();
+			}
+			catch (SQLException e)
+			{
+				Log.e("Get_comedores", e.getMessage() );
+			}
+			return result;
+		}
+		
+		protected void onPostExecute(Vector<struc_Login> result)
+		{
+			String array_spinner[] = new String[result.size()];
+			for (int i = 0; i < result.size(); ++i)
+			{
+				array_spinner[i] = result.get(i).nombre;
+			}
+			
+			ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+					android.R.layout.simple_spinner_item, array_spinner);
+			spn_dinner_room.setAdapter(adapter);
+		}
+	}
+	
 }
