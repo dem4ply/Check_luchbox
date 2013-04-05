@@ -51,7 +51,7 @@ public class SQL_server
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			Log.e("SQL_Server.Open.getConnection", e.getMessage() );
 		}
 	}
