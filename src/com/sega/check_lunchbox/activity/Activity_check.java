@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class Activity_check extends Activity
 {
 	private String str_date;
 	
+	private ImageView img_ok, img_error;
+	private TextView txt_siglas, txt_univercidad, txt_diciplina, txt_nombre;
 	private TextView txt_data_dinner_room;
 	private Button btn_scan;
 	@Override
@@ -33,6 +36,13 @@ public class Activity_check extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_check);
 		txt_data_dinner_room = (TextView)findViewById(R.id.txt_data_dinner_room);
+		txt_siglas = (TextView)findViewById(R.id.txt_siglas);
+		txt_univercidad = (TextView)findViewById(R.id.txt_univercidad);
+		txt_diciplina = (TextView)findViewById(R.id.txt_diciplina);
+		txt_nombre = (TextView)findViewById(R.id.txt_nombre);
+		img_ok = (ImageView)findViewById(R.id.img_ok);
+		img_error = (ImageView)findViewById(R.id.img_error);
+		
 		btn_scan = (Button)findViewById(R.id.btn_scan);
 		btn_scan.setOnClickListener(new OnClickListener()
 		{
@@ -81,7 +91,6 @@ public class Activity_check extends Activity
 	
 	private class tsk_Send_qr extends AsyncTask<String, Void, struc_check_qr>
 	{
-
 		@Override
 		protected struc_check_qr doInBackground(String... qrs)
 		{
@@ -102,13 +111,24 @@ public class Activity_check extends Activity
 		
 		protected void onPostExecute(struc_check_qr result)
 		{
-			Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
+			txt_siglas.setText(result.siglas);
+			txt_univercidad.setText(result.universidad);
+			txt_diciplina.setText(result.diciplina);
+			txt_nombre.setText(result.nombre);
 			if (result.result)
+			{
 				new tsk_Play_sound().execute(1L);
+				img_error.setVisibility(View.GONE);
+				img_ok.setVisibility(View.VISIBLE);
+			}
 			else
+			{
 				new tsk_Play_sound().execute(4L);
+				img_error.setVisibility(View.VISIBLE);
+				img_ok.setVisibility(View.GONE);
+			}
 		}
-
 	}
 	
 	private class tsk_Play_sound extends AsyncTask<Long, Void, Void>
@@ -122,7 +142,7 @@ public class Activity_check extends Activity
 				Notifications.Play_sound(getApplicationContext() );
 				try
 				{
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				}
 				catch (InterruptedException e)
 				{
@@ -131,5 +151,6 @@ public class Activity_check extends Activity
 			}
 			return null;
 		}
+
 	}
 }
