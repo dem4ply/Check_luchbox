@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sega.check_lunchbox.tools.query.SQL_server;
+import com.sega.check_lunchbox.tools.struc.struc_Entradas;
 import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 
 public class Model_Check
@@ -35,6 +36,30 @@ public class Model_Check
 			result = new struc_check_qr(cursor.getBoolean(1),
 					cursor.getString(2), cursor.getString(3), cursor.getString(4),
 					cursor.getString(5), cursor.getString(6) );
+		}
+		
+		//Log.v("Check_qr", "result: " + Integer.toString(result) );
+		//Log.v("Check_qr", result );
+		cursor.close();
+		query.Close();
+		return result;
+	}
+	
+	public struc_Entradas Get_entradas(int id_comedor, String date, int id_comida) throws SQLException
+	{
+		ResultSet cursor;
+		struc_Entradas result = new struc_Entradas();
+		String sql = "SELECT * FROM ConsultarEntradasComedor(%d, '%s', %d)";
+		sql = String.format(sql, id_comedor, date, id_comida);
+		query.sql = sql;
+		
+		query.Open();
+		cursor = query.Exec();
+		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
+		if ( cursor.next() )
+		{
+			//result = cursor.getString(1);
+			result = new struc_Entradas(cursor.getInt(1), cursor.getInt(2) );
 		}
 		
 		//Log.v("Check_qr", "result: " + Integer.toString(result) );
