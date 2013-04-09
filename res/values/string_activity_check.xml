@@ -17,6 +17,7 @@
     <string name="chk_staff">staff</string>
     <color name="dashboard_ok">#00FF00</color>
     <color name="dashboard_no">#FF0000</color>
+    <string name="btn_scan_sudo">Scan sudo</string>
     
     
 </resources>

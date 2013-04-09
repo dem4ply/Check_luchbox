@@ -39,7 +39,7 @@ public class Activity_check extends Activity
 	private TextView txt_data_dinner_room;
 	private TextView chk_sportman, chk_comitiva, chk_judge, chk_staff;
 	private TextView txt_data_count, txt_data_luchbox;
-	private Button btn_scan;
+	private Button btn_scan, btn_scan_sudo;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -63,6 +63,7 @@ public class Activity_check extends Activity
 		img_error = (ImageView)findViewById(R.id.img_error);
 		
 		btn_scan = (Button)findViewById(R.id.btn_scan);
+		btn_scan_sudo = (Button)findViewById(R.id.btn_scan_sudo);
 		btn_scan.setOnClickListener(new OnClickListener()
 		{
 			@Override
@@ -172,6 +173,7 @@ public class Activity_check extends Activity
 			if (result.result)
 			{
 				new tsk_Play_sound().execute(1L);
+				btn_scan_sudo.setVisibility(View.GONE);
 				img_error.setVisibility(View.GONE);
 				img_ok.setVisibility(View.VISIBLE);
 				
@@ -181,6 +183,7 @@ public class Activity_check extends Activity
 			{
 				new tsk_Play_sound().execute(4L);
 				img_error.setVisibility(View.VISIBLE);
+				btn_scan_sudo.setVisibility(View.VISIBLE);
 				img_ok.setVisibility(View.GONE);
 			}
 		}

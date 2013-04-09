@@ -235,6 +235,12 @@
             android:src="@drawable/error"
             android:visibility="gone" />
 
+        <Button
+            android:id="@+id/btn_scan_sudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_scan_sudo" />
+
     </LinearLayout>
 
 </LinearLayout>
