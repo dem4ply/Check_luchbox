@@ -33,7 +33,7 @@ public class Activity_check extends Activity
 	private int id_comida, id_comedor;
 
 	private ImageView img_ok, img_error;
-	private TextView txt_siglas, txt_univercidad, txt_diciplina, txt_nombre;
+	private TextView txt_siglas, txt_univercidad, txt_diciplina, txt_nombre, txt_branch;
 	private TextView txt_data_dinner_room;
 	private TextView chk_sportman, chk_comitiva, chk_judge, chk_staff;
 	private TextView txt_data_count, txt_data_luchbox;
@@ -48,6 +48,7 @@ public class Activity_check extends Activity
 		txt_siglas = (TextView) findViewById(R.id.txt_siglas);
 		txt_univercidad = (TextView) findViewById(R.id.txt_univercidad);
 		txt_diciplina = (TextView) findViewById(R.id.txt_diciplina);
+		txt_branch = (TextView) findViewById(R.id.txt_branch);
 		txt_nombre = (TextView) findViewById(R.id.txt_nombre);
 
 		txt_data_count = (TextView) findViewById(R.id.txt_data_count);
@@ -172,7 +173,9 @@ public class Activity_check extends Activity
 			txt_siglas.setText(result.siglas);
 			txt_univercidad.setText(result.universidad);
 			txt_diciplina.setText(result.diciplina);
+			txt_branch.setText(result.branch);
 			txt_nombre.setText(result.nombre);
+			
 			if (result.result)
 			{
 				new tsk_Play_sound().execute(1L);

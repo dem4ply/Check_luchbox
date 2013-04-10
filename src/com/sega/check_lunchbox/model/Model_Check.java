@@ -35,7 +35,7 @@ public class Model_Check
 			//result = cursor.getString(1);
 			result = new struc_check_qr(cursor.getBoolean(1),
 					cursor.getString(2), cursor.getString(3), cursor.getString(4),
-					cursor.getString(5), cursor.getString(6) );
+					cursor.getString(5), cursor.getString(6), cursor.getString(7) );
 		}
 		
 		//Log.v("Check_qr", "result: " + Integer.toString(result) );
