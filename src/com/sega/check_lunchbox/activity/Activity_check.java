@@ -290,7 +290,7 @@ public class Activity_check extends Activity
 				Log.e("Check_qr", e.getMessage() );
 			}
 			final int normal = result.normal;
-			final int boxlunch = result.normal;
+			final int boxlunch = result.boxlunch;
 			txt_data_count.post(new Runnable()
 			{
 				@Override
