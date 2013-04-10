@@ -24,6 +24,7 @@ import android.widget.Spinner;
 
 import com.sega.check_lunchbox.R;
 import com.sega.check_lunchbox.model.Model_Login;
+import com.sega.check_lunchbox.tools.Get_Date;
 import com.sega.check_lunchbox.tools.Preferences;
 import com.sega.check_lunchbox.tools.struc.struc_Login;
 
@@ -56,6 +57,8 @@ public class Activity_login extends Activity
 			return false;
 			}
 		});
+		
+		edt_date.setText( Get_Date.Get_date_now() );
 		
 		btn_login.setOnClickListener(new OnClickListener()
 		{
@@ -117,7 +120,7 @@ public class Activity_login extends Activity
 		Log.v("date", date);
 		Log.v("food", Integer.toString(food));
 		Log.v("type_food", Integer.toString(type_food));
-		Log.v("dinner_room", Integer.toString(dinner_room));
+		Log.v("dinner_room", Integer.toString(dinner_room + 1));
 		
 		pref.Set_login(date, food, type_food, dinner_room, str_dinner_room);
 		
