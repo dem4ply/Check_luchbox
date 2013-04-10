@@ -6,9 +6,9 @@
     <string name="txt_boxlunch">Boxlunch</string>
     <string name="btn_scan">Escanear QR</string>
     <string name="txt_data_sportsman">Datos del deportista</string>
-    <string name="txt_siglas"></string><string name="txt_univerdidad"></string>
-    <string name="txt_discipline"></string>
-    <string name="txt_nombre"></string>
+    <string name="txt_siglas">txt_siglas</string><string name="txt_univerdidad">txt_universidad</string>
+    <string name="txt_discipline">txt_discipline</string>
+    <string name="txt_nombre">txt_nombre</string>
     <string name="img_desc_check">imagen que dice si entra o no</string>
     <string name="txt_cero">0</string>
     <string name="chk_sportman">Dep</string>
