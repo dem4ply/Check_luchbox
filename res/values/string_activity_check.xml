@@ -18,6 +18,7 @@
     <color name="dashboard_ok">#00FF00</color>
     <color name="dashboard_no">#FF0000</color>
     <string name="btn_scan_sudo">Scan sudo</string>
+    <string name="txt_branch">txt_branch</string>
     
     
 </resources>
