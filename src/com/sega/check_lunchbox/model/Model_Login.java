@@ -37,9 +37,6 @@ public class Model_Login
 					cursor.getBoolean(3), cursor.getBoolean(4),
 					cursor.getBoolean(5), cursor.getBoolean(6)) );
 		}
-		
-		//Log.v("Check_qr", "result: " + Integer.toString(result) );
-		//Log.v("Check_qr", result );
 		cursor.close();
 		query.Close();
 		return result;
