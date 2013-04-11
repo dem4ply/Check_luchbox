@@ -8,6 +8,32 @@
     tools:context=".activity.Activity_check" >
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/txt_date"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_food"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/txt_food"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/lyt_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -191,53 +217,132 @@
         android:text="@string/btn_scan"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_data_sportsman"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/txt_siglas"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_data_sportsman"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_siglas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_siglas"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_univercidad"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:maxHeight="20dp"
+            android:text="@string/txt_univerdidad"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_diciplina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_discipline"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_branch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_branch"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_nombre"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_boxlunch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_siglas"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/txt_univercidad"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="@string/txt_univerdidad"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/TextView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_txt_boxlunch"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/txt_diciplina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_discipline"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/txt_box_uni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_box_uni"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/txt_branch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_branch"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/txt_box_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_box_sport"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/txt_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_nombre"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txt_box_branch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_box_branch"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_box_mod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_box_mod"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_box_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/bg_box_count"
+                android:gravity="center"
+                android:text="@string/txt_cero"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -246,17 +351,10 @@
 
         <ImageView
             android:id="@+id/img_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/ok"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/img_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/error"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btn_scan_sudo"
@@ -265,6 +363,29 @@
             android:text="@string/btn_scan_sudo"
             android:textSize="14sp"
             android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/lyt_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/img_error"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/error"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txt_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_error"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

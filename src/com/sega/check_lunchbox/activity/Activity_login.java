@@ -113,6 +113,7 @@ public class Activity_login extends Activity
 		
 		String date = edt_date.getText().toString();
 		String str_dinner_room = spn_dinner_room.getSelectedItem().toString();
+		String str_food = spn_food.getSelectedItem().toString();
 		int food = spn_food.getSelectedItemPosition();
 		int type_food = spn_type_food.getSelectedItemPosition();
 		int dinner_room = spn_dinner_room.getSelectedItemPosition();
@@ -122,7 +123,7 @@ public class Activity_login extends Activity
 		Log.v("type_food", Integer.toString(type_food));
 		Log.v("dinner_room", Integer.toString(dinner_room + 1));
 		
-		pref.Set_login(date, food, type_food, dinner_room, str_dinner_room);
+		pref.Set_login(date, food, type_food, dinner_room, str_dinner_room, str_food);
 		
 		startActivity(intent);
 	}

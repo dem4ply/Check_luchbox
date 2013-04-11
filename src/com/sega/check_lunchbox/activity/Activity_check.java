@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,15 +30,20 @@ import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 
 public class Activity_check extends Activity
 {
+	private final int NORMAL_SCAN = 0, SUDO_SCAN = 1;
+	
 	private String str_date;
-	private int id_comida, id_comedor;
+	private int id_food, id_dinner, food;
 
 	private ImageView img_ok, img_error;
 	private TextView txt_siglas, txt_univercidad, txt_diciplina, txt_nombre, txt_branch;
 	private TextView txt_data_dinner_room;
 	private TextView chk_sportman, chk_comitiva, chk_judge, chk_staff;
 	private TextView txt_data_count, txt_data_luchbox;
+	private TextView txt_error;
+	private TextView txt_date, txt_food;
 	private Button btn_scan, btn_scan_sudo;
+	private LinearLayout lyt_error, lyt_boxlunch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -53,6 +59,10 @@ public class Activity_check extends Activity
 
 		txt_data_count = (TextView) findViewById(R.id.txt_data_count);
 		txt_data_luchbox = (TextView) findViewById(R.id.txt_data_boxlunch);
+		
+		txt_error = (TextView) findViewById(R.id.txt_error);
+		txt_date = (TextView) findViewById(R.id.txt_date);
+		txt_food = (TextView) findViewById(R.id.txt_food);
 
 		chk_sportman = (TextView) findViewById(R.id.chk_sportsman);
 		chk_comitiva = (TextView) findViewById(R.id.chk_comitiva);
@@ -65,19 +75,33 @@ public class Activity_check extends Activity
 		btn_scan = (Button) findViewById(R.id.btn_scan);
 		btn_scan_sudo = (Button) findViewById(R.id.btn_scan_sudo);
 		
+		lyt_error = (LinearLayout) findViewById(R.id.lyt_error);
+		lyt_boxlunch = (LinearLayout) findViewById(R.id.lyt_boxlunch);
+		
 		btn_scan.setOnClickListener(new OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				_Click_scan();
+				_Click_scan(false);
+			}
+		});
+		
+		btn_scan_sudo.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				_Click_scan(true);
 			}
 		});
 		
 		Preferences pref = new Preferences(getApplicationContext());
 		str_date = pref.Get_params_login().date;
-		id_comida = pref.Get_params_login().type_food;
-		id_comedor = pref.Get_params_login().dinner_room;
+		id_food = pref.Get_params_login().type_food;
+		id_dinner = pref.Get_params_login().dinner_room;
+		txt_food.setText(pref.Get_params_login().str_food);
+		txt_date.setText(str_date);
 		_Set_dashboard_init();
 		new Timer().schedule(new timer_Get_entrada(), 0, 10000);
 		new tsk_Get_comedor().execute();
@@ -94,7 +118,7 @@ public class Activity_check extends Activity
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
 		String contents = "vacio";
-		if (requestCode == 0)
+		if (requestCode == NORMAL_SCAN)
 		{
 			if (resultCode == RESULT_OK)
 			{
@@ -105,6 +129,19 @@ public class Activity_check extends Activity
 				contents = "cancelacion";
 
 			Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_SHORT)
+					.show();
+		}
+		else if (requestCode == SUDO_SCAN)
+		{
+			if (resultCode == RESULT_OK)
+			{
+				contents = intent.getStringExtra("SCAN_RESULT");
+				new tsk_Send_sudo_qr().execute(contents);
+			}
+			else if (resultCode == RESULT_CANCELED)
+				contents = "cancelacion";
+
+			Toast.makeText(getApplicationContext(), "sudo" + contents, Toast.LENGTH_SHORT)
 					.show();
 		}
 	}
@@ -138,12 +175,30 @@ public class Activity_check extends Activity
 		else
 			chk_staff.setBackgroundResource(R.color.dashboard_no);
 	}
+	
+	private void _Qr_check(boolean error)
+	{
+		if (error)
+		{
+			btn_scan_sudo.setVisibility(View.GONE);
+			lyt_error.setVisibility(View.GONE);
+			img_ok.setVisibility(View.VISIBLE);
+			lyt_boxlunch.setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			btn_scan_sudo.setVisibility(View.VISIBLE);
+			lyt_error.setVisibility(View.VISIBLE);
+			img_ok.setVisibility(View.GONE);
+			lyt_boxlunch.setVisibility(View.GONE);
+		}
+	}
 
-	private void _Click_scan()
+	private void _Click_scan(boolean sudo)
 	{
 		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		startActivityForResult(intent, 0);
+		startActivityForResult(intent, sudo ? SUDO_SCAN : NORMAL_SCAN);
 	}
 	
 	private class tsk_Send_qr extends AsyncTask<String, Void, struc_check_qr>
@@ -158,8 +213,7 @@ public class Activity_check extends Activity
 			Model_Check model = new Model_Check(getApplicationContext());
 			try
 			{
-				// result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
-				result = model.Check_qr(qr, str_date, 1, 1, 1);
+				result = model.Check_qr(qr, str_date, id_dinner, food, id_food);
 			}
 			catch (SQLException e)
 			{
@@ -176,21 +230,57 @@ public class Activity_check extends Activity
 			txt_branch.setText(result.branch);
 			txt_nombre.setText(result.nombre);
 			
+			txt_error.setText(result.msg_err);
+			
+			//Log.v("Send_qr", result.msg_err);
+			
 			if (result.result)
 			{
 				new tsk_Play_sound().execute(1L);
-				btn_scan_sudo.setVisibility(View.GONE);
-				img_error.setVisibility(View.GONE);
-				img_ok.setVisibility(View.VISIBLE);
-				
+				_Qr_check(result.result);
 				new Timer().schedule(new timer_Click_scan(), 2000L);
 			}
 			else
 			{
 				new tsk_Play_sound().execute(4L);
-				img_error.setVisibility(View.VISIBLE);
-				btn_scan_sudo.setVisibility(View.VISIBLE);
-				img_ok.setVisibility(View.GONE);
+				_Qr_check(result.result);
+			}
+		}
+	}
+	
+	private class tsk_Send_sudo_qr extends AsyncTask<String, Void, Boolean>
+	{
+		@Override
+		protected Boolean doInBackground(String... qrs)
+		{
+			// Toast.makeText(getApplicationContext(), "qr-init",
+			// Toast.LENGTH_SHORT).show();
+			String qr = qrs[0];
+			boolean result = false;
+			Model_Check model = new Model_Check(getApplicationContext());
+			try
+			{
+				result = model.Is_sudo(qr);
+			}
+			catch (SQLException e)
+			{
+				Log.e("Check_qr", e.getMessage());
+			}
+			return result;
+		}
+
+		protected void onPostExecute(Boolean result)
+		{			
+			if (result)
+			{
+				new tsk_Play_sound().execute(1L);
+				_Qr_check(result);
+				//new Timer().schedule(new timer_Click_scan(), 2000L);
+			}
+			else
+			{
+				new tsk_Play_sound().execute(4L);
+				_Qr_check(result);
 			}
 		}
 	}
@@ -231,7 +321,7 @@ public class Activity_check extends Activity
 			try
 			{
 				// result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
-				result = model.Get_entradas(id_comedor, str_date, id_comida);
+				result = model.Get_entradas(id_dinner, str_date, id_food);
 			}
 			catch (SQLException e)
 			{
@@ -264,7 +354,7 @@ public class Activity_check extends Activity
 		@Override
 		public void run()
 		{
-			_Click_scan();
+			_Click_scan(false);
 		}
 	}
 	
@@ -280,7 +370,7 @@ public class Activity_check extends Activity
 			try
 			{
 				// result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
-				result = model.Get_comedor(id_comedor);
+				result = model.Get_comedor(id_dinner);
 			}
 			catch (SQLException e)
 			{

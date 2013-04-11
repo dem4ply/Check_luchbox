@@ -68,5 +68,26 @@ public class Model_Check
 		query.Close();
 		return result;
 	}
+	
+	public boolean Is_sudo(String qr) throws SQLException
+	{
+		ResultSet cursor;
+		boolean result = false;
+		String sql = "Select dbo.ValidarGafeteSupervisor('%s')";
+		sql = String.format(sql, qr);
+		query.sql = sql;
+		
+		query.Open();
+		cursor = query.Exec();
+		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
+		if ( cursor.next() )
+		{
+			result = cursor.getBoolean(1);
+		}
+		
+		cursor.close();
+		query.Close();
+		return result;
+	}
 
 }

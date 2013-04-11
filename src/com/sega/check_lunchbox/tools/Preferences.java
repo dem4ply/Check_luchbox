@@ -34,12 +34,13 @@ public class Preferences
 		edit.commit();
 	}
 	
-	public void Set_login(String date, int food, int type_food, int dinner_room, String str_dinner_room)
+	public void Set_login(String date, int food, int type_food, int dinner_room, String str_dinner_room, String str_food)
 	{
 		Editor edit = prefs_login.edit();
 		
 		edit.putString("date", date);
 		edit.putString("str_dinner_room", str_dinner_room);
+		edit.putString("str_food", str_food);
 		edit.putInt("food", food);
 		edit.putInt("type_food", type_food);
 		edit.putInt("dinner_room", dinner_room);
@@ -51,11 +52,12 @@ public class Preferences
 	{
 		String date = prefs_login.getString("date", "");
 		String str_dinner_room = prefs_login.getString("str_dinner_room", "");
+		String str_food = prefs_login.getString("str_food", "");
 		int food = prefs_login.getInt("food", 0);
 		int type_food = prefs_login.getInt("type_food", 0);
 		int dinner_room = prefs_login.getInt("dinner_room", 0);
 		
-		return new struc_Param_login(date, food, type_food, dinner_room, str_dinner_room);
+		return new struc_Param_login(date, food, type_food, dinner_room, str_dinner_room, str_food);
 	}
 	
 	public struc_Params_sql_server Get_params_sql_server()
