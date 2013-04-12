@@ -3,7 +3,7 @@ package com.sega.check_lunchbox.tools.struc;
 public class struc_Boxlunch
 {
 	 public int total;
-	 String uni, sport, branch, mod;
+	 public String uni, sport, branch, mod;
 	 
 	 public struc_Boxlunch()
 	 {

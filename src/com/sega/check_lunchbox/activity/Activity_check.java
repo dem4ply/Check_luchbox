@@ -23,6 +23,7 @@ import com.sega.check_lunchbox.model.Model_Check;
 import com.sega.check_lunchbox.model.Model_Login;
 import com.sega.check_lunchbox.tools.Notifications;
 import com.sega.check_lunchbox.tools.Preferences;
+import com.sega.check_lunchbox.tools.struc.struc_Boxlunch;
 import com.sega.check_lunchbox.tools.struc.struc_Entradas;
 import com.sega.check_lunchbox.tools.struc.struc_Login;
 import com.sega.check_lunchbox.tools.struc.struc_Param_login;
@@ -43,6 +44,7 @@ public class Activity_check extends Activity
 	private TextView txt_data_count, txt_data_luchbox;
 	private TextView txt_error;
 	private TextView txt_date, txt_food;
+	private TextView txt_box_uni, txt_box_sport, txt_box_branch, txt_box_mod, txt_box_count_2;
 	private Button btn_scan, btn_scan_sudo;
 	private LinearLayout lyt_error, lyt_boxlunch;
 
@@ -64,6 +66,13 @@ public class Activity_check extends Activity
 		txt_error = (TextView) findViewById(R.id.txt_error);
 		txt_date = (TextView) findViewById(R.id.txt_date);
 		txt_food = (TextView) findViewById(R.id.txt_food);
+		
+		txt_box_uni = (TextView) findViewById(R.id.txt_box_uni);
+		txt_box_sport = (TextView) findViewById(R.id.txt_box_sport);
+		txt_box_mod = (TextView) findViewById(R.id.txt_box_mod);
+		txt_box_branch = (TextView) findViewById(R.id.txt_box_branch);
+		txt_box_count_2 = (TextView) findViewById(R.id.txt_box_count_2);
+		Log.e("fuck", (String) txt_box_count_2.getText());
 
 		chk_sportman = (TextView) findViewById(R.id.chk_sportsman);
 		chk_comitiva = (TextView) findViewById(R.id.chk_comitiva);
@@ -100,6 +109,7 @@ public class Activity_check extends Activity
 		Preferences pref = new Preferences(getApplicationContext());
 		str_date = pref.Get_params_login().date;
 		id_food = pref.Get_params_login().type_food;
+		
 		id_dinner = pref.Get_params_login().dinner_room;
 		txt_food.setText(pref.Get_params_login().str_food);
 		txt_date.setText(str_date);
@@ -130,6 +140,8 @@ public class Activity_check extends Activity
 			if (resultCode == RESULT_OK)
 			{
 				contents = intent.getStringExtra("SCAN_RESULT");
+				if (id_food == BOXLUNCH)
+					new tsk_Send_qr_box().execute(contents);
 				new tsk_Send_qr().execute(contents);
 			}
 			else if (resultCode == RESULT_CANCELED)
@@ -205,7 +217,6 @@ public class Activity_check extends Activity
 			btn_scan_sudo.setVisibility(View.VISIBLE);
 			lyt_error.setVisibility(View.VISIBLE);
 			img_ok.setVisibility(View.GONE);
-			
 			if (id_food == BOXLUNCH)
 				lyt_boxlunch.setVisibility(View.VISIBLE);
 			else
@@ -225,8 +236,6 @@ public class Activity_check extends Activity
 		@Override
 		protected struc_check_qr doInBackground(String... qrs)
 		{
-			// Toast.makeText(getApplicationContext(), "qr-init",
-			// Toast.LENGTH_SHORT).show();
 			String qr = qrs[0];
 			struc_check_qr result = new struc_check_qr();
 			Model_Check model = new Model_Check(getApplicationContext());
@@ -400,6 +409,35 @@ public class Activity_check extends Activity
 		{
 			_Set_dashboard_type(result.sportman, result.comitiva, result.judge,
 					result.staff);
+		}
+	}
+
+	private class tsk_Send_qr_box extends AsyncTask<String, Void, struc_Boxlunch>
+	{
+		@Override
+		protected struc_Boxlunch doInBackground(String... qrs)
+		{
+			String qr = qrs[0];
+			struc_Boxlunch result = new struc_Boxlunch();
+			Model_Check model = new Model_Check(getApplicationContext());
+			try
+			{
+				result = model.Get_boxlunch(qr, str_date, food);
+			}
+			catch (SQLException e)
+			{
+				Log.e("Check_qr", e.getMessage());
+			}
+			return result;
+		}
+
+		protected void onPostExecute(struc_Boxlunch result)
+		{	
+			txt_box_branch.setText(result.branch);
+			txt_box_count_2.setText(Integer.toString(result.total) );
+			txt_box_mod.setText(result.mod);
+			txt_box_sport.setText(result.sport);
+			txt_box_uni.setText(result.uni);
 		}
 	}
 }
