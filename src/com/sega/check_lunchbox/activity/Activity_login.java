@@ -118,10 +118,14 @@ public class Activity_login extends Activity
 		int type_food = spn_type_food.getSelectedItemPosition();
 		int dinner_room = spn_dinner_room.getSelectedItemPosition();
 		
+		++dinner_room;
+		++food;
+		++type_food;
+		
 		Log.v("date", date);
 		Log.v("food", Integer.toString(food));
 		Log.v("type_food", Integer.toString(type_food));
-		Log.v("dinner_room", Integer.toString(dinner_room + 1));
+		Log.v("dinner_room", Integer.toString(dinner_room));
 		
 		pref.Set_login(date, food, type_food, dinner_room, str_dinner_room, str_food);
 		

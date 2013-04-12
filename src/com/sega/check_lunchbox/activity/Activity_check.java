@@ -31,6 +31,7 @@ import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 public class Activity_check extends Activity
 {
 	private final int NORMAL_SCAN = 0, SUDO_SCAN = 1;
+	private final int BOXLUNCH = 2, NORMAL = 1;
 	
 	private String str_date;
 	private int id_food, id_dinner, food;
@@ -105,6 +106,12 @@ public class Activity_check extends Activity
 		_Set_dashboard_init();
 		new Timer().schedule(new timer_Get_entrada(), 0, 10000);
 		new tsk_Get_comedor().execute();
+		
+		if (id_food == NORMAL)
+			lyt_boxlunch.setVisibility(View.GONE);
+		else
+			lyt_boxlunch.setVisibility(View.VISIBLE);
+		
 	}
 
 	@Override
@@ -128,6 +135,7 @@ public class Activity_check extends Activity
 			else if (resultCode == RESULT_CANCELED)
 				contents = "cancelacion";
 
+			
 			Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_SHORT)
 					.show();
 		}
@@ -158,6 +166,10 @@ public class Activity_check extends Activity
 	private void _Set_dashboard_type(boolean sportman, boolean comitiva,
 			boolean judge, boolean staff)
 	{
+		Log.v("Set_dashboard", "sportman " + Boolean.toString(sportman) );
+		Log.v("Set_dashboard", "mitiva " + Boolean.toString(comitiva) );
+		Log.v("Set_dashboard", "judge " + Boolean.toString(judge) );
+		Log.v("Set_dashboard", "staff " + Boolean.toString(staff) );
 		if (sportman)
 			chk_sportman.setBackgroundResource(R.color.dashboard_ok);
 		else
@@ -183,14 +195,21 @@ public class Activity_check extends Activity
 			btn_scan_sudo.setVisibility(View.GONE);
 			lyt_error.setVisibility(View.GONE);
 			img_ok.setVisibility(View.VISIBLE);
-			lyt_boxlunch.setVisibility(View.VISIBLE);
+			if (id_food == BOXLUNCH)
+				lyt_boxlunch.setVisibility(View.VISIBLE);
+			else
+				lyt_boxlunch.setVisibility(View.GONE);
 		}
 		else
 		{
 			btn_scan_sudo.setVisibility(View.VISIBLE);
 			lyt_error.setVisibility(View.VISIBLE);
 			img_ok.setVisibility(View.GONE);
-			lyt_boxlunch.setVisibility(View.GONE);
+			
+			if (id_food == BOXLUNCH)
+				lyt_boxlunch.setVisibility(View.VISIBLE);
+			else
+				lyt_boxlunch.setVisibility(View.GONE);
 		}
 	}
 
@@ -363,8 +382,6 @@ public class Activity_check extends Activity
 		@Override
 		protected struc_Login doInBackground(Void... params)
 		{
-			// Toast.makeText(getApplicationContext(), "qr-init",
-			// Toast.LENGTH_SHORT).show();
 			struc_Login result = new struc_Login();
 			Model_Login model = new Model_Login(getApplicationContext());
 			try

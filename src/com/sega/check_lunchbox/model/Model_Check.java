@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sega.check_lunchbox.tools.query.SQL_server;
+import com.sega.check_lunchbox.tools.struc.struc_Boxlunch;
 import com.sega.check_lunchbox.tools.struc.struc_Entradas;
 import com.sega.check_lunchbox.tools.struc.struc_check_qr;
 
@@ -69,7 +70,30 @@ public class Model_Check
 		return result;
 	}
 	
-	public boolean Is_sudo(String qr) throws SQLException
+	public struc_Boxlunch Get_boxlunch(String qr, String date, int food) throws SQLException
+	{
+		struc_Boxlunch result = new struc_Boxlunch();
+		
+		ResultSet cursor;
+		String sql = "Select * from dbo.ConsultarAcumuladoBoxLunch('%s', '%s', %d)";
+		sql = String.format(sql, qr, date, food);
+		query.sql = sql;
+		
+		query.Open();
+		cursor = query.Exec();
+		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
+		if ( cursor.next() )
+		{
+			result = new struc_Boxlunch(cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+		}
+		
+		cursor.close();
+		query.Close();
+		
+		return result;
+	}
+	
+ 	public boolean Is_sudo(String qr) throws SQLException
 	{
 		ResultSet cursor;
 		boolean result = false;
