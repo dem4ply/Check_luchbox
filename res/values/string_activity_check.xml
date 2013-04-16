@@ -6,9 +6,9 @@
     <string name="txt_boxlunch">Boxlunch</string>
     <string name="btn_scan">Escanear QR</string>
     <string name="txt_data_sportsman">Datos del deportista</string>
-    <string name="txt_siglas">txt_siglas</string><string name="txt_univerdidad">txt_universidad</string>
-    <string name="txt_discipline">txt_discipline</string>
-    <string name="txt_nombre">txt_nombre</string>
+    <string name="txt_siglas"></string><string name="txt_univerdidad"></string>
+    <string name="txt_discipline"></string>
+    <string name="txt_nombre"></string>
     <string name="img_desc_check">imagen que dice si entra o no</string>
     <string name="txt_cero">0</string>
     <string name="chk_sportman">Dep</string>
@@ -17,14 +17,14 @@
     <string name="chk_staff">staff</string>
     
     
-    <string name="btn_scan_sudo">Scan sudo</string>
-    <string name="txt_branch">txt_branch</string>
+    <string name="btn_scan_sudo">Scanear supervisor</string>
+    <string name="txt_branch"></string>
     <string name="txt_error">txt_error</string>
     <string name="_txt_boxlunch">Box lunch:</string>
-    <string name="txt_box_uni">txt_box_univercidad</string>
-    <string name="txt_box_sport">txt_box_sport</string>
-    <string name="txt_box_branch">txt_box_branch</string>
-    <string name="txt_box_mod">txt_box_mod</string>
+    <string name="txt_box_uni"></string>
+    <string name="txt_box_sport"></string>
+    <string name="txt_box_branch"></string>
+    <string name="txt_box_mod"></string>
     <color name="bg_box_count">#0000FF</color>
     <color name="dashboard_ok">#00FF00</color>
     <color name="dashboard_no">#FF0000</color>
