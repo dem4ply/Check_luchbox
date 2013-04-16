@@ -37,7 +37,7 @@ public class Activity_check extends Activity
 	private String str_date;
 	private int id_food, id_dinner, food;
 
-	private ImageView img_ok, img_error;
+	private ImageView img_ok;
 	private TextView txt_siglas, txt_univercidad, txt_diciplina, txt_nombre, txt_branch;
 	private TextView txt_data_dinner_room;
 	private TextView chk_sportman, chk_comitiva, chk_judge, chk_staff;
@@ -80,7 +80,6 @@ public class Activity_check extends Activity
 		chk_staff = (TextView) findViewById(R.id.chk_staff);
 
 		img_ok = (ImageView) findViewById(R.id.img_ok);
-		img_error = (ImageView) findViewById(R.id.img_error);
 
 		btn_scan = (Button) findViewById(R.id.btn_scan);
 		btn_scan_sudo = (Button) findViewById(R.id.btn_scan_sudo);
@@ -260,8 +259,6 @@ public class Activity_check extends Activity
 			
 			txt_error.setText(result.msg_err);
 			
-			//Log.v("Send_qr", result.msg_err);
-			
 			if (result.result)
 			{
 				new tsk_Play_sound().execute(1L);
@@ -281,8 +278,6 @@ public class Activity_check extends Activity
 		@Override
 		protected Boolean doInBackground(String... qrs)
 		{
-			// Toast.makeText(getApplicationContext(), "qr-init",
-			// Toast.LENGTH_SHORT).show();
 			String qr = qrs[0];
 			boolean result = false;
 			Model_Check model = new Model_Check(getApplicationContext());
@@ -318,8 +313,6 @@ public class Activity_check extends Activity
 		@Override
 		protected Void doInBackground(Long... sounds)
 		{
-			// Toast.makeText(getApplicationContext(), "sonidos",
-			// Toast.LENGTH_SHORT).show();
 			Long count = sounds[0];
 			for (int i = 0; i < count; ++i)
 			{
@@ -348,7 +341,6 @@ public class Activity_check extends Activity
 			Model_Check model = new Model_Check(getApplicationContext());
 			try
 			{
-				// result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
 				result = model.Get_entradas(id_dinner, str_date, id_food);
 			}
 			catch (SQLException e)
@@ -395,7 +387,6 @@ public class Activity_check extends Activity
 			Model_Login model = new Model_Login(getApplicationContext());
 			try
 			{
-				// result = model.Check_qr(qr, Get_Date.Get_date_now(), 1, 1, 1);
 				result = model.Get_comedor(id_dinner);
 			}
 			catch (SQLException e)

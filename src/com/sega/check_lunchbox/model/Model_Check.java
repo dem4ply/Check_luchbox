@@ -31,16 +31,14 @@ public class Model_Check
 		query.Open();
 		cursor = query.Exec();
 		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
+		
 		if ( cursor.next() )
 		{
-			//result = cursor.getString(1);
 			result = new struc_check_qr(cursor.getBoolean(1),
 					cursor.getString(2), cursor.getString(3), cursor.getString(4),
 					cursor.getString(5), cursor.getString(6), cursor.getString(7) );
 		}
 		
-		//Log.v("Check_qr", "result: " + Integer.toString(result) );
-		//Log.v("Check_qr", result );
 		cursor.close();
 		query.Close();
 		return result;
@@ -59,12 +57,9 @@ public class Model_Check
 		Log.v("Check_qr", Integer.toString( cursor.getMetaData().getColumnCount() ) );
 		if ( cursor.next() )
 		{
-			//result = cursor.getString(1);
 			result = new struc_Entradas(cursor.getInt(1), cursor.getInt(2) );
 		}
 		
-		//Log.v("Check_qr", "result: " + Integer.toString(result) );
-		//Log.v("Check_qr", result );
 		cursor.close();
 		query.Close();
 		return result;
