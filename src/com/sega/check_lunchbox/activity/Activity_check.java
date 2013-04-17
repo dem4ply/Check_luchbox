@@ -108,7 +108,7 @@ public class Activity_check extends Activity
 		Preferences pref = new Preferences(getApplicationContext());
 		str_date = pref.Get_params_login().date;
 		id_food = pref.Get_params_login().type_food;
-		
+		food = pref.Get_params_login().food;
 		id_dinner = pref.Get_params_login().dinner_room;
 		txt_food.setText(pref.Get_params_login().str_food);
 		txt_date.setText(str_date);
