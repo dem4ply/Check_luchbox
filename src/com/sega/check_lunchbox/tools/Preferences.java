@@ -24,7 +24,7 @@ public class Preferences
 		Editor edit = prefs_SQL.edit();
 		
 		edit.putString("url", "jdbc:jtds:sqlserver://");
-		edit.putString("server", "72.167.245.123");
+		edit.putString("server", "148.227.75.21");
 		edit.putString("port", "1500");
 		edit.putString("database", "BDUniversiada");
 		edit.putString("user", "UNIVERSIADA2013");
@@ -64,7 +64,7 @@ public class Preferences
 	{
 		struc_Params_sql_server result = new struc_Params_sql_server();
 		result.url = prefs_SQL.getString("url", "jdbc:jtds:sqlserver://");
-		result.server = prefs_SQL.getString("server", "72.167.245.123");
+		result.server = prefs_SQL.getString("server", "148.227.75.21");
 		result.port = prefs_SQL.getString("port", "1500");
 		result.database = prefs_SQL.getString("database", "BDUniversiada");
 		result.user = prefs_SQL.getString("user", "UNIVERSIADA2013");

@@ -26,8 +26,8 @@
     <string name="txt_box_branch"></string>
     <string name="txt_box_mod"></string>
     <color name="bg_box_count">#0000FF</color>
-    <color name="dashboard_ok">#00FF00</color>
-    <color name="dashboard_no">#FF0000</color>
+    <color name="dashboard_ok">#4C8540</color>
+    <color name="dashboard_no">#922E2E</color>
         
     
 </resources>

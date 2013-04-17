@@ -217,6 +217,7 @@
             android:id="@+id/btn_scan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/qr_code"
             android:text="@string/btn_scan"
             android:textSize="14sp" />
 
@@ -361,6 +362,7 @@
                 android:id="@+id/btn_scan_sudo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/qr_code"
                 android:text="@string/btn_scan_sudo"
                 android:textSize="14sp"
                 android:visibility="gone" />
